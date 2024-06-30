@@ -8,6 +8,11 @@ class CalculatorServicer(calculator_pb2_grpc.CalculatorServicer):
         result = request.num1 + request.num2
         return calculator_pb2.AddResponse(result=result)
 
+    def Sub(self, request, context):
+        result = request.num1 - request.num2
+        return calculator_pb2.SubResponse(result=result)
+
+
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     calculator_pb2_grpc.add_CalculatorServicer_to_server(CalculatorServicer(), server)
